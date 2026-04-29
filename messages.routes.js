@@ -25,7 +25,12 @@ router.get('/:userId', auth, async (req, res) => {
     ]
   });
 
-  res.json(messages);
+  const decryptedMessages = messages.map(msg => ({
+    ...msg._doc,
+    decryptedContent: decryptMessage(msg.encryptedContent, "TEMP_PRIVATE_KEY")
+}));
+
+res.json(decryptedMessages);
 });
 
 module.exports = router;
