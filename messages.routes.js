@@ -8,7 +8,7 @@ const auth = require('../middleware/auth');
 
 router.post('/send', auth, async (req, res) => {
   const { receiverId, message: plainText } = req.body;
-  const encryptedContent = encryptMessage(plainText, "TEMP_PUBLIC_KEY");
+  const encryptedContent = encryptMessage(plainText, TEMP_PUBLIC_KEY);
 
   const message = new Message({
     senderId: req.user.id,
@@ -30,7 +30,7 @@ router.get('/:userId', auth, async (req, res) => {
 
   const decryptedMessages = messages.map(msg => ({
     ...msg._doc,
-    decryptedContent: decryptMessage(msg.encryptedContent, "TEMP_PRIVATE_KEY")
+    decryptedContent: decryptMessage(msg.encryptedContent, TEMP_PRIVATE_KEY)
 }));
 
 res.json(decryptedMessages);
