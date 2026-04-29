@@ -29,8 +29,10 @@ router.get('/:userId', auth, async (req, res) => {
   });
 
   const decryptedMessages = messages.map(msg => ({
-    ...msg._doc,
-    decryptedContent: decryptMessage(msg.encryptedContent, TEMP_PRIVATE_KEY)
+    _id: msg._id,
+    senderId: msg.senderId,
+    receiverId: msg.receiverId,
+    content: decryptMessage(msg.encryptedContent, TEMP_PRIVATE_KEY)
 }));
 
 res.json(decryptedMessages);
