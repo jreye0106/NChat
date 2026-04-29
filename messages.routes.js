@@ -1,3 +1,6 @@
+const { generateKeyPair } = require("../security/encryption");
+
+const { publicKey: TEMP_PUBLIC_KEY, privateKey: TEMP_PRIVATE_KEY } = generateKeyPair();
 const { encryptMessage, decryptMessage } = require("../security/encryption");
 const router = require('express').Router();
 const Message = require('../models/Message');
