@@ -4,7 +4,8 @@ const Message = require('../models/Message');
 const auth = require('../middleware/auth');
 
 router.post('/send', auth, async (req, res) => {
-  const { receiverId, encryptedContent } = req.body;
+  const { receiverId, message } = req.body;
+  const encryptedContent = encryptMessage(message, "TEMP_PUBLIC_KEY");
 
   const message = new Message({
     senderId: req.user.id,
