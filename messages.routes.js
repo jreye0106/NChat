@@ -1,3 +1,4 @@
+const { encryptMessage, decryptMessage } = require("../security/encryption");
 const router = require('express').Router();
 const Message = require('../models/Message');
 const auth = require('../middleware/auth');
